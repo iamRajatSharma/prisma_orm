@@ -3,8 +3,15 @@ import { prismaClient } from "..";
 import { compareSync, hashSync } from "bcrypt";
 import * as jwt from "jsonwebtoken"
 import { JWTSECRET } from "../secrets";
+import { SignUpSchema } from "../schema/Users";
 
 export const signup = async (req: Request, res: Response) => {
+
+    const validator = SignUpSchema.safeParse(req.body)
+    if (!validator.success) {
+        return res.json({ error: 1, details: validator.error })
+    }
+
     const { name, email, password } = req.body;
 
     let user = await prismaClient.user.findFirst({ where: { email } })
@@ -23,6 +30,7 @@ export const signup = async (req: Request, res: Response) => {
 
 
 export const login = async (req: Request, res: Response) => {
+
     const { email, password } = req.body;
 
     let user = await prismaClient.user.findFirst({ where: { email } })
@@ -37,4 +45,8 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign({ user_id: user }, JWTSECRET)
 
     return res.json({ user, token })
+}
+
+export const me = async (req: Request, res: Response) => {
+    return res.json({ "message": "Welcome " })
 }
