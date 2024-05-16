@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { prismaClient } from ".."
-import { Result } from "@prisma/client/runtime/library"
 
 export const createProduct = async (req: Request, res: Response) => {
 
