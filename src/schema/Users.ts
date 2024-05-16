@@ -5,3 +5,12 @@ export const SignUpSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6).max(16)
 })
+
+export const AddressSchame = z.object({
+    line1: z.string(),
+    line2: z.string().nullable(),
+    city: z.string(),
+    country: z.string(),
+    pincode: z.string().length(6),
+    userId: z.number()
+})

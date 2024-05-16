@@ -49,7 +49,7 @@ model Address {
     line2     String?
     city      String
     country   String
-    pinceo    String
+    pincode    String
     userId    Int
     user      User     @relation(fields: [userId], references: [id])
     createdAt DateTime @default(now())
