@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import * as jwt from "jsonwebtoken"
 import { JWTSECRET } from "../secrets"
 import { prismaClient } from ".."
+import { User } from "@prisma/client"
 
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     // try {
@@ -23,14 +24,8 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
         return res.json({ message: "User not found" })
     }
 
-    // 5. to attach the user to the current request object
-    // req.user = user;
+    // 5. to attach the user to the current request object  
     next()
-    // }
-    // catch (error: any) {
-    //     console.log(error)
-    //     return res.json({ error, msg: 1 })
-    // }
 }
 
 export default authMiddleware;

@@ -8,9 +8,7 @@ var bodyParser = require('body-parser')
 app.use(express.json())
 app.use("/api", rootRouter)
 app.use(bodyParser.urlencoded({ extended: false }))
-app.get("/", (req, res) => {
-    res.send({ message: "Home Route" })
-})
+
 
 export const prismaClient = new PrismaClient({
     log: ['query']
