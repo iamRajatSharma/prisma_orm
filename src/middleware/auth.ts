@@ -23,7 +23,6 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
     if (!user) {
         return res.json({ message: "User not found" })
     }
-
     // 5. to attach the user to the current request object  
     next()
 }
