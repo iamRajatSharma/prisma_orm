@@ -5,6 +5,6 @@ const addressRoutes = Router();
 
 addressRoutes.post("/", addAddress)
 addressRoutes.get("/", listAddress)
-addressRoutes.delete("/", deleteAddress)
+addressRoutes.delete("/:id", deleteAddress)
 
 export default addressRoutes;

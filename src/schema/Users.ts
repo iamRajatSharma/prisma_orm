@@ -14,3 +14,10 @@ export const AddressSchame = z.object({
     pincode: z.string().length(6),
     userId: z.number()
 })
+
+
+export const updateUserSchema = z.object({
+    name: z.string(),
+    defaultShippingAddress: z.number().nullable(),
+    defaultBillingAddress: z.number().nullable()
+})

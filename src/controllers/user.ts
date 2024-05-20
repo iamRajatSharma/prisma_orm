@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { AddressSchame } from "../schema/Users";
+import { AddressSchame, updateUserSchema } from "../schema/Users";
 import { prismaClient } from "..";
-import { User } from "@prisma/client";
+import { Address, User } from "@prisma/client";
 
 let user: User;
 
@@ -25,8 +25,7 @@ export const addAddress = async (req: Request, res: Response) => {
 
     const address = await prismaClient.address.create({
         data: {
-            ...req.body,
-            userId: user.id
+            ...req.body
         }
     })
     res.send({ address })
@@ -35,10 +34,30 @@ export const addAddress = async (req: Request, res: Response) => {
 
 
 export const deleteAddress = async (req: Request, res: Response) => {
-
+    try {
+        const resp = await prismaClient.address.delete({
+            where: {
+                id: +req.params.id
+            }
+        })
+        res.send({ resp })
+    }
+    catch (err) {
+        res.send({ err })
+    }
 }
 
 
 export const listAddress = async (req: Request, res: Response) => {
-
+    const resp = await prismaClient.address.findMany({})
+    res.send({ resp })
 }
+
+
+// export const updateUser = async (req: Request, res: Response) => {
+//     const validate = updateUserSchema.safeParse(req.body)
+//     let ShippingAddress : Address;
+//     let BillingAddress : Address;
+
+
+// }
